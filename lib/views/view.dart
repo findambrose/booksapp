@@ -33,42 +33,59 @@ class _ViewState extends State<View> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-            padding: EdgeInsets.all(10),
-            child: StreamBuilder(
-                stream: booksStream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    Map<String, dynamic> data = snapshot.data;
-                    if (data['error'] == true) {
-                      //Show error message
-                      SnackBar snackbar = SnackBar(
-                        content:
-                            Text('Error fetching books. Pull down to refresh'),
-                      );
-                      Scaffold.of(context).showSnackBar(snackbar);
-                    } else {
-                      List<Book> books = data['books'];
+        child: RefreshIndicator(
+          onRefresh: () async {
+            setUpData();
+          },
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Container(
+                height: MediaQuery.of(context).size.height,
+                padding: EdgeInsets.all(10),
+                child: StreamBuilder(
+                    stream: booksStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        Map<String, dynamic> data = snapshot.data;
+                        if (data['error'] == true) {
+                          //Show error message
+                          SnackBar snackbar = SnackBar(
+                            content: Text(
+                                'Error fetching books. Pull down to refresh'),
+                          );
+                          Scaffold.of(context).showSnackBar(snackbar);
+                        } else {
+                          List<Book> books = data['books'];
 
-                      return ListView.builder(
-                          itemCount: books.length,
-                          itemBuilder: (context, index) {
-                            //Return a container with a book instance
-                            return Container(
-                              child: Column(
-                                children: [
-                                 BookRecordEntry(label: 'Book Name ', value: books[index].name,),
-                                 BookRecordEntry(label: 'Book Author ', value: books[index].author,),
-                                 BookRecordEntry(label: 'Year Published', value: books[index].year,),
-                                 
-                                ],
-                              ),
-                            );
-                          });
-                    }
-                  }
-                  return SpinKitHourGlass(color: Colors.indigo);
-                })),
+                          return ListView.builder(
+                              itemCount: books.length,
+                              itemBuilder: (context, index) {
+                                //Return a container with a book instance
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      BookRecordEntry(
+                                        label: 'Book Name ',
+                                        value: books[index].name,
+                                      ),
+                                      BookRecordEntry(
+                                        label: 'Book Author ',
+                                        value: books[index].author,
+                                      ),
+                                      BookRecordEntry(
+                                        label: 'Year Published',
+                                        value: books[index].year,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              });
+                        }
+                      }
+                      return SpinKitHourGlass(color: Colors.indigo);
+                    })),
+          ),
+        ),
       ),
     );
   }
