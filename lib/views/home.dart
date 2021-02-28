@@ -13,6 +13,8 @@ class _HomeState extends State<Home> {
         title: Text('Home'),
       ),
       body: Container(
+
+        padding: EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
