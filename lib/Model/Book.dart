@@ -1,4 +1,4 @@
 class Book {
-  String name, author, year;
-  Book({this.name, this.author, this.year});
+  String name, author, review, year, rating;
+  Book({this.name, this.author, this.year, this.review, this.rating});
 }

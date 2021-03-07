@@ -1,5 +1,4 @@
 import 'package:books/BLoC/Bloc.dart';
-import 'package:books/Model/Book.dart';
 import 'package:books/Service/ViewService.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -14,7 +13,7 @@ ViewBloc(ViewService viewService){
 
   @override
   dispose() {
-    // TODO: implement dispose
+   
     behaviorSubject.close();
     throw UnimplementedError();
   }

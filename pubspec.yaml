@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   rxdart: ^0.25.0
   dio: ^3.0.10
+  http: ^0.12.2
   flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
