@@ -1,8 +1,7 @@
-import 'dart:html';
 
-import 'package:books/add.dart';
-import 'package:books/home.dart';
-import 'package:books/view.dart';
+import 'package:books/views/add.dart';
+import 'package:books/views/home.dart';
+import 'package:books/views/view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,11 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BookApp',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      initialRoute: '/',
       routes: {
         '/': (context){
           return Home(); 
